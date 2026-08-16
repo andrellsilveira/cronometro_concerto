@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador para o Concerto</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7d1e0, #b2e2f2, #fdfd96);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #5d4037;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #timer {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .vela-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            z-index: 1;
+        }
+
+        .vela {
+            width: 20px;
+            height: 60px;
+            background: #ffe082;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .chama {
+            width: 10px;
+            height: 15px;
+            background: #ff7043;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -15px;
+            left: 5px;
+            animation: piscar 0.5s infinite alternate;
+        }
+		
+		.candle {
+            position: absolute;
+            width: 10px;
+            height: 50px;
+            background: #fff;
+            bottom: 0;
+            border-radius: 5px;
+        }
+        .flame {
+            position: absolute;
+            top: -20px;
+            width: 10px;
+            height: 20px;
+            background: #ffab40;
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes piscar {
+            0% { opacity: 0.7; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+		
+		@keyframes flicker {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="timer">Carregando...</div>
+
+    <div class="vela-container" id="velas"></div>
+
+    <script>
+        // Data alvo: 21/08/2026 às 17:00:00
+        const dataAlvo = new Date("2026-08-21T17:00:00").getTime();
+
+        function atualizarContador() {
+            const agora = new Date().getTime();
+            const diferenca = dataAlvo - agora;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 
+                `Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
+        }
+
+        // Criar velas dinamicamente
+        /*const containerVelas = document.getElementById("velas");
+        for(let i=0; i<20; i++) {
+            const divVela = document.createElement("div");
+            divVela.className = "vela";
+            divVela.innerHTML = '<div class="chama"></div>';
+            divVela.style.left = (i * 20) + "%";
+            containerVelas.appendChild(divVela);
+        }*/
+		
+		for(let i=0; i<50; i++) {
+            let candle = document.createElement('div');
+            candle.className = 'candle';
+            candle.style.left = (Math.random() * 98) + 'vw';
+            candle.style.height = (Math.random() * 30 + 30) + 'px';
+            let flame = document.createElement('div');
+            flame.className = 'flame';
+            candle.appendChild(flame);
+            document.body.appendChild(candle);
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+</body>
+</html>
