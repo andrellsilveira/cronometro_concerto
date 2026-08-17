@@ -335,7 +335,7 @@ atualizarContador();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contador para o Concerto</title>
+<title>Contando as horas para o Concerto</title>
 <style>
 body {
 margin: 0;
@@ -482,7 +482,7 @@ const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
 const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
 
 document.getElementById("timer").innerHTML = 
-`Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
+`Contando as horas para o concerto...<br/><br/>Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
 }
 
 // Criar velas dinamicamente
