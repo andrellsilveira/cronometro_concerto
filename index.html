@@ -137,7 +137,7 @@
 </body>
 </html-->
 
-<html lang="pt-BR">
+<!--html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -329,4 +329,203 @@ setInterval(atualizarContador, 1000);
 atualizarContador();
 </script>
 </body>
+</html-->
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador para o Concerto</title>
+<style>
+body {
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(135deg, #f7d1e0, #b2e2f2, #fdfd96);
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+color: #5d4037;
+text-align: center;
+overflow: hidden;
+position: relative;
+}
+
+#timer {
+font-size: 1.5rem;
+background: rgba(255, 255, 255, 0.7);
+padding: 20px;
+border-radius: 20px;
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+z-index: 10;
+}
+
+.vela-container {
+position: absolute;
+bottom: 25px; /* Elevado para subir as velas */
+width: 100%;
+display: flex;
+justify-content: space-around;
+z-index: 1;
+}
+
+.vela {
+width: 20px;
+height: 60px;
+background: #ffe082;
+border-radius: 5px;
+position: relative;
+}
+
+.chama {
+width: 10px;
+height: 15px;
+background: #ff7043;
+border-radius: 50% 50% 20% 20%;
+position: absolute;
+top: -15px;
+left: 5px;
+/* Adicionado brilho à chama */
+box-shadow: 0 0 8px #ff7043, 0 0 15px #ffab40;
+animation: piscar 0.5s infinite alternate;
+}
+
+.candle {
+position: absolute;
+width: 10px;
+height: 50px;
+background: #fff;
+bottom: 25px; /* Elevado do fundo da tela */
+border-radius: 5px;
+}
+
+.flame {
+position: absolute;
+top: -20px;
+width: 10px;
+height: 20px;
+background: #ffab40;
+border-radius: 50% 50% 20% 20%;
+/* Adicionado brilho luminoso intenso à chama das velas */
+box-shadow: 0 0 8px #ffab40, 0 0 16px #ffeb3b, 0 0 24px #ff9800;
+animation: flicker 0.5s infinite alternate;
+}
+
+/* Estilos para as estrelas caindo */
+.estrela {
+position: absolute;
+top: -30px;
+color: #fff;
+text-shadow: 0 0 6px #fff, 0 0 12px #ffeb3b, 0 0 18px #ffeb3b;
+pointer-events: none;
+z-index: 2;
+animation: cair linear infinite;
+}
+
+.estrela-inner {
+display: inline-block;
+animation: piscarEstrela infinite alternate ease-in-out;
+}
+
+@keyframes cair {
+0% {
+  transform: translateY(0) rotate(0deg);
+  opacity: 0;
+}
+10% {
+  opacity: 1;
+}
+90% {
+  opacity: 1;
+}
+100% {
+  transform: translateY(105vh) rotate(360deg);
+  opacity: 0;
+}
+}
+
+@keyframes piscarEstrela {
+0% { opacity: 0.2; transform: scale(0.6); }
+100% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes piscar {
+0% { opacity: 0.7; transform: scale(1); }
+100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes flicker {
+0% { opacity: 0.5; transform: scale(0.8) drop-shadow(0 0 4px #ffeb3b); }
+100% { opacity: 1; transform: scale(1.1) drop-shadow(0 0 12px #ffeb3b); }
+}
+</style>
+</head>
+<body>
+
+<div id="timer">Carregando...</div>
+
+<div class="vela-container" id="velas"></div>
+
+<script>
+// Data alvo: 21/08/2026 às 17:00:00
+const dataAlvo = new Date("2026-08-21T17:00:00").getTime();
+
+function atualizarContador() {
+const agora = new Date().getTime();
+const diferenca = dataAlvo - agora;
+
+const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+document.getElementById("timer").innerHTML = 
+`Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
+}
+
+// Criar velas dinamicamente
+for(let i=0; i<50; i++) {
+let candle = document.createElement('div');
+candle.className = 'candle';
+candle.style.left = (Math.random() * 98) + 'vw';
+candle.style.height = (Math.random() * 30 + 30) + 'px';
+let flame = document.createElement('div');
+flame.className = 'flame';
+candle.appendChild(flame);
+document.body.appendChild(candle);
+}
+
+// Criar estrelas piscantes caindo
+const quantidadeEstrelas = 35;
+for(let i = 0; i < quantidadeEstrelas; i++) {
+let estrela = document.createElement('div');
+estrela.className = 'estrela';
+estrela.style.left = (Math.random() * 98) + 'vw';
+
+// Propriedades aleatórias para queda e piscado
+const duracaoCair = Math.random() * 4 + 3; // Entre 3 e 7 segundos
+const atraso = Math.random() * 5; // Atraso de até 5 segundos para início suave
+const duracaoPiscar = Math.random() * 0.6 + 0.3; // Vel. de piscado rápida
+const tamanho = Math.random() * 16 + 10; // Tamanho entre 10px e 26px
+
+estrela.style.animationDuration = `${duracaoCair}s`;
+estrela.style.animationDelay = `${atraso}s`;
+estrela.style.fontSize = `${tamanho}px`;
+
+let inner = document.createElement('span');
+inner.className = 'estrela-inner';
+inner.innerHTML = '★';
+inner.style.animationDuration = `${duracaoPiscar}s`;
+
+estrela.appendChild(inner);
+document.body.appendChild(estrela);
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
+</body>
 </html>
+
