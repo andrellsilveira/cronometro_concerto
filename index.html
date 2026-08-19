@@ -230,27 +230,29 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* Silhuetas dos Músicos (Camada atrás das velas) */
-.orchestra-container {
+/* Imagem das Silhuetas (posicionada atrás das velas) */
+.silhueta-container {
   position: absolute;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  height: 60vh;
+  max-width: 900px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-end;
-  z-index: 2; /* Fica atrás das velas (z-index: 5) */
+  z-index: 2; /* Camada abaixo das velas */
   pointer-events: none;
-  opacity: 0.85;
 }
 
-.orchestra-svg {
+.silhueta-img {
   width: 100%;
-  height: 100%;
-  max-height: 450px;
+  max-height: 55vh;
+  object-fit: contain;
+  opacity: 0.9;
 }
 
-/* Velas e Chamas */
+/* Velas e Chamas (sobrepõem a imagem das silhuetas) */
 .candle {
   position: absolute;
   width: 12px;
@@ -258,7 +260,7 @@ body {
   background: #fff;
   bottom: 15px;
   border-radius: 4px;
-  z-index: 5; /* Fica à frente dos músicos */
+  z-index: 5; /* Camada acima da imagem das silhuetas */
   box-shadow: inset -2px 0 4px rgba(0,0,0,0.1);
 }
 
@@ -312,60 +314,9 @@ body {
 
 <div id="timer">Carregando...</div>
 
-<!-- Silhuetas dos Músicos Posicionadas Atrás das Velas -->
-<div class="orchestra-container">
-  <svg class="orchestra-svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax meet" fill="#3a232e">
-    <!-- Violoncelista Esquerda -->
-    <g transform="translate(80, 80) scale(0.85)">
-      <circle cx="90" cy="50" r="18" />
-      <path d="M70,80 Q90,70 110,80 L125,210 L55,210 Z" />
-      <!-- Cello -->
-      <path d="M110,140 C140,150 140,190 110,210 C140,230 130,270 95,280 C60,270 50,230 80,210 C50,190 50,150 80,140 Z" fill="#2a1820"/>
-      <rect x="92" y="70" width="6" height="80" fill="#2a1820" />
-      <!-- Arco -->
-      <line x1="40" y1="170" x2="150" y2="150" stroke="#2a1820" stroke-width="3" />
-    </g>
-
-    <!-- Violinista 1 -->
-    <g transform="translate(280, 100) scale(0.8)">
-      <circle cx="80" cy="50" r="18" />
-      <path d="M60,80 Q80,70 100,80 L115,220 L45,220 Z" />
-      <!-- Violino no ombro -->
-      <path d="M80,85 L140,105 L135,120 L75,100 Z" fill="#2a1820" />
-      <!-- Arco -->
-      <line x1="120" y1="65" x2="90" y2="145" stroke="#2a1820" stroke-width="3" />
-    </g>
-
-    <!-- Maestro (Centro) -->
-    <g transform="translate(540, 40) scale(0.95)">
-      <circle cx="60" cy="50" r="18" />
-      <path d="M35,80 Q60,65 85,80 L95,260 L25,260 Z" />
-      <!-- Braço Esquerdo Erguido -->
-      <path d="M40,90 L10,40 L22,35 L48,80 Z" />
-      <!-- Braço Direito com Batuta -->
-      <path d="M80,90 L120,50 L128,58 L90,95 Z" />
-      <line x1="120" y1="50" x2="165" y2="15" stroke="#2a1820" stroke-width="2.5" />
-    </g>
-
-    <!-- Flautista -->
-    <g transform="translate(760, 100) scale(0.8)">
-      <circle cx="60" cy="50" r="18" />
-      <path d="M40,80 Q60,70 80,80 L95,220 L25,220 Z" />
-      <!-- Transversal Flute -->
-      <rect x="50" y="72" width="90" height="5" transform="rotate(-10 50 72)" fill="#2a1820" />
-    </g>
-
-    <!-- Contrabaxista Direita -->
-    <g transform="translate(940, 50) scale(0.9)">
-      <circle cx="70" cy="50" r="18" />
-      <path d="M50,80 Q70,70 90,80 L105,250 L35,250 Z" />
-      <!-- Contrabraço e Instrumento grande -->
-      <path d="M100,110 C140,120 150,170 110,200 C150,230 140,290 90,300 C50,290 40,230 80,200 C40,170 50,120 90,110 Z" fill="#2a1820"/>
-      <rect x="92" y="20" width="8" height="110" fill="#2a1820" />
-      <!-- Arco -->
-      <line x1="40" y1="180" x2="130" y2="170" stroke="#2a1820" stroke-width="3.5" />
-    </g>
-  </svg>
+<!-- Container da imagem das silhuetas -->
+<div class="silhueta-container">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGqX3JQElxP5-aTMGF40UEt6R-2cnUsu8zAkGtKwZMO8CRFiCtcwL3Bc0&s=10" alt="Silhuetas de Músicos" class="silhueta-img">
 </div>
 
 <script>
@@ -385,7 +336,7 @@ function atualizarContador() {
     `Contando as horas...<br/><br/>Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
 }
 
-// Criar velas dinamicamente na frente dos músicos
+// Criar velas dinamicamente sobre a imagem
 for(let i = 0; i < 45; i++) {
   let candle = document.createElement('div');
   candle.className = 'candle';
