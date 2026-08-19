@@ -1,336 +1,4 @@
-<!DOCTYPE html>
-<!--html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador para o Concerto</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f7d1e0, #b2e2f2, #fdfd96);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #5d4037;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        #timer {
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            z-index: 10;
-        }
-
-        .vela-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            z-index: 1;
-        }
-
-        .vela {
-            width: 20px;
-            height: 60px;
-            background: #ffe082;
-            border-radius: 5px;
-            position: relative;
-        }
-
-        .chama {
-            width: 10px;
-            height: 15px;
-            background: #ff7043;
-            border-radius: 50% 50% 20% 20%;
-            position: absolute;
-            top: -15px;
-            left: 5px;
-            animation: piscar 0.5s infinite alternate;
-        }
-		
-		.candle {
-            position: absolute;
-            width: 10px;
-            height: 50px;
-            background: #fff;
-            bottom: 0;
-            border-radius: 5px;
-        }
-        .flame {
-            position: absolute;
-            top: -20px;
-            width: 10px;
-            height: 20px;
-            background: #ffab40;
-            border-radius: 50% 50% 20% 20%;
-            animation: flicker 0.5s infinite alternate;
-        }
-
-        @keyframes piscar {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-		
-		@keyframes flicker {
-            0% { opacity: 0.5; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="timer">Carregando...</div>
-
-    <div class="vela-container" id="velas"></div>
-
-    <script>
-        // Data alvo: 21/08/2026 às 17:00:00
-        const dataAlvo = new Date("2026-08-21T17:00:00").getTime();
-
-        function atualizarContador() {
-            const agora = new Date().getTime();
-            const diferenca = dataAlvo - agora;
-
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-            document.getElementById("timer").innerHTML = 
-                `Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
-        }
-
-        // Criar velas dinamicamente
-        /*const containerVelas = document.getElementById("velas");
-        for(let i=0; i<20; i++) {
-            const divVela = document.createElement("div");
-            divVela.className = "vela";
-            divVela.innerHTML = '<div class="chama"></div>';
-            divVela.style.left = (i * 20) + "%";
-            containerVelas.appendChild(divVela);
-        }*/
-		
-		for(let i=0; i<50; i++) {
-            let candle = document.createElement('div');
-            candle.className = 'candle';
-            candle.style.left = (Math.random() * 98) + 'vw';
-            candle.style.height = (Math.random() * 30 + 30) + 'px';
-            let flame = document.createElement('div');
-            flame.className = 'flame';
-            candle.appendChild(flame);
-            document.body.appendChild(candle);
-        }
-
-        setInterval(atualizarContador, 1000);
-        atualizarContador();
-    </script>
-</body>
-</html-->
-
-<!--html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contador para o Concerto</title>
-<style>
-body {
-margin: 0;
-padding: 0;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: linear-gradient(135deg, #f7d1e0, #b2e2f2, #fdfd96);
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-color: #5d4037;
-text-align: center;
-overflow: hidden;
-position: relative;
-}
-
-#timer {
-font-size: 1.5rem;
-background: rgba(255, 255, 255, 0.7);
-padding: 20px;
-border-radius: 20px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-z-index: 10;
-}
-
-.vela-container {
-position: absolute;
-bottom: 0;
-width: 100%;
-display: flex;
-justify-content: space-around;
-z-index: 1;
-}
-
-.vela {
-width: 20px;
-height: 60px;
-background: #ffe082;
-border-radius: 5px;
-position: relative;
-}
-
-.chama {
-width: 10px;
-height: 15px;
-background: #ff7043;
-border-radius: 50% 50% 20% 20%;
-position: absolute;
-top: -15px;
-left: 5px;
-animation: piscar 0.5s infinite alternate;
-}
-
-.candle {
-position: absolute;
-width: 10px;
-height: 50px;
-background: #fff;
-bottom: 0;
-border-radius: 5px;
-}
-
-.flame {
-position: absolute;
-top: -20px;
-width: 10px;
-height: 20px;
-background: #ffab40;
-border-radius: 50% 50% 20% 20%;
-animation: flicker 0.5s infinite alternate;
-}
-
-/* Estilos para as estrelas caindo */
-.estrela {
-position: absolute;
-top: -30px;
-color: #fff;
-text-shadow: 0 0 6px #fff, 0 0 12px #ffeb3b, 0 0 18px #ffeb3b;
-pointer-events: none;
-z-index: 2;
-animation: cair linear infinite;
-}
-
-.estrela-inner {
-display: inline-block;
-animation: piscarEstrela infinite alternate ease-in-out;
-}
-
-@keyframes cair {
-0% {
-  transform: translateY(0) rotate(0deg);
-  opacity: 0;
-}
-10% {
-  opacity: 1;
-}
-90% {
-  opacity: 1;
-}
-100% {
-  transform: translateY(105vh) rotate(360deg);
-  opacity: 0;
-}
-}
-
-@keyframes piscarEstrela {
-0% { opacity: 0.2; transform: scale(0.6); }
-100% { opacity: 1; transform: scale(1.3); }
-}
-
-@keyframes piscar {
-0% { opacity: 0.7; transform: scale(1); }
-100% { opacity: 1; transform: scale(1.2); }
-}
-
-@keyframes flicker {
-0% { opacity: 0.5; transform: scale(0.8); }
-100% { opacity: 1; transform: scale(1.1); }
-}
-</style>
-</head>
-<body>
-
-<div id="timer">Carregando...</div>
-
-<div class="vela-container" id="velas"></div>
-
-<script>
-// Data alvo: 21/08/2026 às 17:00:00
-const dataAlvo = new Date("2026-08-21T17:00:00").getTime();
-
-function atualizarContador() {
-const agora = new Date().getTime();
-const diferenca = dataAlvo - agora;
-
-const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-document.getElementById("timer").innerHTML = 
-`Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
-}
-
-// Criar velas dinamicamente
-for(let i=0; i<50; i++) {
-let candle = document.createElement('div');
-candle.className = 'candle';
-candle.style.left = (Math.random() * 98) + 'vw';
-candle.style.height = (Math.random() * 30 + 30) + 'px';
-let flame = document.createElement('div');
-flame.className = 'flame';
-candle.appendChild(flame);
-document.body.appendChild(candle);
-}
-
-// Criar estrelas piscantes caindo
-const quantidadeEstrelas = 35;
-for(let i = 0; i < quantidadeEstrelas; i++) {
-let estrela = document.createElement('div');
-estrela.className = 'estrela';
-estrela.style.left = (Math.random() * 98) + 'vw';
-
-// Propriedades aleatórias para queda e piscado
-const duracaoCair = Math.random() * 4 + 3; // Entre 3 e 7 segundos
-const atraso = Math.random() * 5; // Atraso de até 5 segundos para início suave
-const duracaoPiscar = Math.random() * 0.6 + 0.3; // Vel. de piscado rápida
-const tamanho = Math.random() * 16 + 10; // Tamanho entre 10px e 26px
-
-estrela.style.animationDuration = `${duracaoCair}s`;
-estrela.style.animationDelay = `${atraso}s`;
-estrela.style.fontSize = `${tamanho}px`;
-
-let inner = document.createElement('span');
-inner.className = 'estrela-inner';
-inner.innerHTML = '★';
-inner.style.animationDuration = `${duracaoPiscar}s`;
-
-estrela.appendChild(inner);
-document.body.appendChild(estrela);
-}
-
-setInterval(atualizarContador, 1000);
-atualizarContador();
-</script>
-</body>
-</html-->
-
+<!--DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -527,5 +195,238 @@ setInterval(atualizarContador, 1000);
 atualizarContador();
 </script>
 </body>
-</html>
+</html-->
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contando as horas para o Concerto</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f7d1e0, #b2e2f2, #fdfd96);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #5d4037;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#timer {
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  z-index: 10;
+  backdrop-filter: blur(4px);
+}
+
+/* Silhuetas dos Músicos (Camada atrás das velas) */
+.orchestra-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  z-index: 2; /* Fica atrás das velas (z-index: 5) */
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.orchestra-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 450px;
+}
+
+/* Velas e Chamas */
+.candle {
+  position: absolute;
+  width: 12px;
+  height: 50px;
+  background: #fff;
+  bottom: 15px;
+  border-radius: 4px;
+  z-index: 5; /* Fica à frente dos músicos */
+  box-shadow: inset -2px 0 4px rgba(0,0,0,0.1);
+}
+
+.flame {
+  position: absolute;
+  top: -18px;
+  left: 1px;
+  width: 10px;
+  height: 20px;
+  background: #ffab40;
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 8px #ffab40, 0 0 16px #ffeb3b, 0 0 24px #ff9800;
+  animation: flicker 0.5s infinite alternate;
+}
+
+/* Estrelas caindo */
+.estrela {
+  position: absolute;
+  top: -30px;
+  color: #fff;
+  text-shadow: 0 0 6px #fff, 0 0 12px #ffeb3b;
+  pointer-events: none;
+  z-index: 3;
+  animation: cair linear infinite;
+}
+
+.estrela-inner {
+  display: inline-block;
+  animation: piscarEstrela infinite alternate ease-in-out;
+}
+
+@keyframes cair {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes piscarEstrela {
+  0% { opacity: 0.2; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.6; transform: scale(0.85) drop-shadow(0 0 4px #ffeb3b); }
+  100% { opacity: 1; transform: scale(1.1) drop-shadow(0 0 12px #ffeb3b); }
+}
+</style>
+</head>
+<body>
+
+<div id="timer">Carregando...</div>
+
+<!-- Silhuetas dos Músicos Posicionadas Atrás das Velas -->
+<div class="orchestra-container">
+  <svg class="orchestra-svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax meet" fill="#3a232e">
+    <!-- Violoncelista Esquerda -->
+    <g transform="translate(80, 80) scale(0.85)">
+      <circle cx="90" cy="50" r="18" />
+      <path d="M70,80 Q90,70 110,80 L125,210 L55,210 Z" />
+      <!-- Cello -->
+      <path d="M110,140 C140,150 140,190 110,210 C140,230 130,270 95,280 C60,270 50,230 80,210 C50,190 50,150 80,140 Z" fill="#2a1820"/>
+      <rect x="92" y="70" width="6" height="80" fill="#2a1820" />
+      <!-- Arco -->
+      <line x1="40" y1="170" x2="150" y2="150" stroke="#2a1820" stroke-width="3" />
+    </g>
+
+    <!-- Violinista 1 -->
+    <g transform="translate(280, 100) scale(0.8)">
+      <circle cx="80" cy="50" r="18" />
+      <path d="M60,80 Q80,70 100,80 L115,220 L45,220 Z" />
+      <!-- Violino no ombro -->
+      <path d="M80,85 L140,105 L135,120 L75,100 Z" fill="#2a1820" />
+      <!-- Arco -->
+      <line x1="120" y1="65" x2="90" y2="145" stroke="#2a1820" stroke-width="3" />
+    </g>
+
+    <!-- Maestro (Centro) -->
+    <g transform="translate(540, 40) scale(0.95)">
+      <circle cx="60" cy="50" r="18" />
+      <path d="M35,80 Q60,65 85,80 L95,260 L25,260 Z" />
+      <!-- Braço Esquerdo Erguido -->
+      <path d="M40,90 L10,40 L22,35 L48,80 Z" />
+      <!-- Braço Direito com Batuta -->
+      <path d="M80,90 L120,50 L128,58 L90,95 Z" />
+      <line x1="120" y1="50" x2="165" y2="15" stroke="#2a1820" stroke-width="2.5" />
+    </g>
+
+    <!-- Flautista -->
+    <g transform="translate(760, 100) scale(0.8)">
+      <circle cx="60" cy="50" r="18" />
+      <path d="M40,80 Q60,70 80,80 L95,220 L25,220 Z" />
+      <!-- Transversal Flute -->
+      <rect x="50" y="72" width="90" height="5" transform="rotate(-10 50 72)" fill="#2a1820" />
+    </g>
+
+    <!-- Contrabaxista Direita -->
+    <g transform="translate(940, 50) scale(0.9)">
+      <circle cx="70" cy="50" r="18" />
+      <path d="M50,80 Q70,70 90,80 L105,250 L35,250 Z" />
+      <!-- Contrabraço e Instrumento grande -->
+      <path d="M100,110 C140,120 150,170 110,200 C150,230 140,290 90,300 C50,290 40,230 80,200 C40,170 50,120 90,110 Z" fill="#2a1820"/>
+      <rect x="92" y="20" width="8" height="110" fill="#2a1820" />
+      <!-- Arco -->
+      <line x1="40" y1="180" x2="130" y2="170" stroke="#2a1820" stroke-width="3.5" />
+    </g>
+  </svg>
+</div>
+
+<script>
+// Data alvo: 21/08/2026 às 17:00:00
+const dataAlvo = new Date("2026-08-21T17:00:00").getTime();
+
+function atualizarContador() {
+  const agora = new Date().getTime();
+  const diferenca = dataAlvo - agora;
+
+  const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+  document.getElementById("timer").innerHTML = 
+    `Contando as horas...<br/><br/>Faltam ${dias} dias e ${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')} para irmos ao concerto!!<br />Será em 21/08/2026 às 17:00<br/><br/>TE AMO!`;
+}
+
+// Criar velas dinamicamente na frente dos músicos
+for(let i = 0; i < 45; i++) {
+  let candle = document.createElement('div');
+  candle.className = 'candle';
+  candle.style.left = (Math.random() * 96 + 1) + 'vw';
+  candle.style.height = (Math.random() * 30 + 25) + 'px';
+  
+  let flame = document.createElement('div');
+  flame.className = 'flame';
+  
+  candle.appendChild(flame);
+  document.body.appendChild(candle);
+}
+
+// Criar estrelas piscantes caindo
+const quantidadeEstrelas = 35;
+for(let i = 0; i < quantidadeEstrelas; i++) {
+  let estrela = document.createElement('div');
+  estrela.className = 'estrela';
+  estrela.style.left = (Math.random() * 98) + 'vw';
+
+  const duracaoCair = Math.random() * 4 + 3;
+  const atraso = Math.random() * 5;
+  const duracaoPiscar = Math.random() * 0.6 + 0.3;
+  const tamanho = Math.random() * 16 + 10;
+
+  estrela.style.animationDuration = `${duracaoCair}s`;
+  estrela.style.animationDelay = `${atraso}s`;
+  estrela.style.fontSize = `${tamanho}px`;
+
+  let inner = document.createElement('span');
+  inner.className = 'estrela-inner';
+  inner.innerHTML = '★';
+  inner.style.animationDuration = `${duracaoPiscar}s`;
+
+  estrela.appendChild(inner);
+  document.body.appendChild(estrela);
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
+
+</body>
+</html>
