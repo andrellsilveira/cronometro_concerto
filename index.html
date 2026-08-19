@@ -228,12 +228,13 @@ body {
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   z-index: 10;
   backdrop-filter: blur(4px);
+  margin-bottom: 80px; /* Eleva levemente o contador para dar espaço */
 }
 
-/* Imagem das Silhuetas (posicionada atrás das velas) */
+/* Imagem da Orquestra (subida levemente e com blend mode para disfarçar o fundo) */
 .silhueta-container {
   position: absolute;
-  bottom: 0;
+  bottom: 60px; /* Subiu a imagem da orquestra */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -247,20 +248,22 @@ body {
 
 .silhueta-img {
   width: 100%;
-  max-height: 55vh;
+  max-height: 50vh;
   object-fit: contain;
-  opacity: 0.9;
+  opacity: 0.95;
+  /* O mix-blend-mode ajuda a mesclar partes claras/fundo quadriculado falso com o gradiente */
+  mix-blend-mode: multiply; 
 }
 
-/* Velas e Chamas (sobrepõem a imagem das silhuetas) */
+/* Velas e Chamas (subidas para acompanhar a orquestra) */
 .candle {
   position: absolute;
   width: 12px;
   height: 50px;
   background: #fff;
-  bottom: 15px;
+  bottom: 75px; /* Subiu o nível das velas */
   border-radius: 4px;
-  z-index: 5; /* Camada acima da imagem das silhuetas */
+  z-index: 5; /* Camada acima da imagem */
   box-shadow: inset -2px 0 4px rgba(0,0,0,0.1);
 }
 
@@ -314,9 +317,9 @@ body {
 
 <div id="timer">Carregando...</div>
 
-<!-- Container da imagem das silhuetas -->
+<!-- Container da imagem da orquestra -->
 <div class="silhueta-container">
-  <img src="./orquestra.png" alt="Silhuetas de Músicos" class="silhueta-img">
+  <img src="./orquestra.png" alt="Orquestra" class="silhueta-img">
 </div>
 
 <script>
